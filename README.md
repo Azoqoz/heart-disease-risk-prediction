@@ -1,138 +1,108 @@
-# AI Investment Opportunity Analyzer
+# Heart Disease Risk Prediction
 
-A machine learning decision-support dashboard for evaluating synthetic investment opportunities, estimating an Investment Score from 0 to 100, and classifying each opportunity as Invest, Review, or Reject.
+A machine learning web application that estimates heart disease risk from patient clinical information, with a recall-focused evaluation strategy designed to reduce false-negative predictions.
 
 ![Python](https://img.shields.io/badge/Language-Python-blue)
 ![Streamlit](https://img.shields.io/badge/Framework-Streamlit-red)
-![Machine Learning](https://img.shields.io/badge/ML-Regression-purple)
-![Model](https://img.shields.io/badge/Selected%20Model-Ridge%20Regression-green)
-![Data](https://img.shields.io/badge/Dataset-Synthetic-orange)
+![Machine Learning](https://img.shields.io/badge/ML-Classification-purple)
+![Model](https://img.shields.io/badge/Selected%20Model-XGBoost-green)
+![Focus](https://img.shields.io/badge/Optimization-Recall-orange)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 ---
 
 ## Overview
 
-AI Investment Opportunity Analyzer is an end-to-end machine learning application that simulates how investment opportunities can be evaluated through a structured scoring and recommendation workflow.
+Heart Disease Risk Prediction is an end-to-end machine learning application that estimates heart disease risk using patient clinical information.
 
-The system analyzes financial, market, strategic, risk, sustainability, sector, and regional factors to estimate an Investment Score between 0 and 100.
+The project focuses not only on achieving strong overall classification performance, but also on improving recall and reducing false-negative predictions.
 
-The predicted score is converted into one of three recommendation categories:
+A false negative occurs when the model predicts a negative result for a patient who belongs to the positive class. Because missing a potentially positive case may be more concerning in a health-risk screening scenario, recall was treated as an important evaluation metric during model development.
 
-- **Invest**
-- **Review**
-- **Reject**
+The final XGBoost model is integrated into an interactive Streamlit application that provides:
 
-The project covers the complete machine learning lifecycle, including synthetic data generation, exploratory data analysis, feature engineering, preprocessing, model comparison, explainability, prediction, and interactive dashboard development.
+- A heart disease risk prediction
+- A probability-based result
+- A clear interpretation of the model output
+- Model performance information
+- An accessible interface for non-technical users
 
 ---
 
 ## Important Disclaimer
 
 > [!WARNING]
-> This project uses a fully synthetic dataset created for educational and portfolio purposes.
+> This project was created for educational and portfolio purposes.
 >
-> It does not use real investment data and must not be treated as financial advice or used for real investment decisions without validated data, domain-expert review, governance, and additional testing.
+> It is not a medical device, does not provide a clinical diagnosis, and must not be used as a substitute for professional medical evaluation, testing, treatment, or advice.
+>
+> Model predictions may be incorrect and should not be used to make healthcare decisions.
 
 ---
 
 ## Key Features
 
-- Generate a synthetic investment-opportunity dataset
-- Analyze 5,000 synthetic opportunity records
-- Explore opportunities across multiple sectors and regions
-- Calculate an Investment Score from 0 to 100
-- Classify opportunities as Invest, Review, or Reject
-- Compare multiple regression algorithms
-- Select the best-performing model using Mean Absolute Error
-- Preprocess numerical and categorical features
-- Scale numerical variables with StandardScaler
-- Encode categorical variables with OneHotEncoder
-- Create financial, market, strategic, sustainability, and risk features
-- Rank existing opportunities using configurable filters
-- Inspect individual opportunities and their decision factors
-- Predict scores for new opportunity profiles
-- Convert simplified user inputs into model-ready features
-- Explain predictions through feature contributions
-- Display model results and analytics in an interactive Streamlit dashboard
-- Persist the trained model and preprocessing pipeline using Joblib
+- Interactive Streamlit web application
+- Patient clinical-information input form
+- Heart disease risk classification
+- Probability-based prediction output
+- XGBoost classification model
+- Comparison of multiple machine learning models
+- Recall-focused model evaluation
+- False-negative reduction objective
+- Data cleaning and preprocessing
+- Exploratory data analysis
+- Feature engineering
+- Numerical feature scaling
+- Class-imbalance handling using SMOTE
+- Hyperparameter tuning
+- Model performance visualization
+- Saved-model loading using Joblib
+- Clean and user-friendly interface
+- Separate model-training script
+- Reusable saved scaler and trained model
+
+---
+
+## Live Demo
+
+The deployed Streamlit application is available at:
+
+[Open the Heart Disease Risk Prediction App](https://ai-heart-risk-detector.streamlit.app/)
 
 ---
 
 ## Demo Workflow
 
-The dashboard contains five main sections.
+1. Open the Streamlit application.
+2. Enter the requested patient clinical information.
+3. Submit the information for prediction.
+4. Apply the saved feature-scaling process.
+5. Send the processed values to the trained XGBoost model.
+6. Generate a risk classification.
+7. Calculate the corresponding model probability.
+8. Display the result through the Streamlit interface.
 
-### 1. Overview
+Example workflow:
 
-Review high-level information such as:
-
-- Total number of opportunities
-- Average Investment Score
-- Average risk level
-- Number of Invest recommendations
-- Recommendation distribution
-- Investment-score distribution
-- Average scores by sector
-- Average scores by region
-
-### 2. Opportunity Ranking
-
-Filter and rank existing opportunities using:
-
-- Sector
-- Region
-- Recommendation
-- Investment Score range
-- Number of results to display
-
-The opportunities are ranked using Investment Score, expected ROI, and overall risk.
-
-### 3. Analyze Existing Opportunity
-
-Select an existing opportunity and review:
-
-- Investment Score
-- Recommendation
-- Expected ROI
-- Overall risk
-- Sector and region
-- Investment size
-- Payback period
-- Profit margin
-- Financial strength
-- Market attractiveness
-- Strategic impact
-- Sustainability
-
-### 4. Predict New Opportunity
-
-Enter a simplified opportunity profile using:
-
-- Sector
-- Region
-- Competition level
-- Investment size
-- Expected ROI
-- Payback period
-- Market demand
-- Overall risk
-- Strategic alignment
-- Sustainability and ESG potential
-
-The application converts these inputs into the complete model feature set before generating the score and recommendation.
-
-### 5. Methodology
-
-Review:
-
-- Machine learning workflow
-- Target variable
-- Selected model
-- Recommendation thresholds
-- Model-comparison results
-- Mean Absolute Error visualization
-- Project limitations and disclaimer
+```text
+Patient Clinical Information
+             |
+             v
+      Input Validation
+             |
+             v
+    Saved Feature Scaler
+             |
+             v
+    Trained XGBoost Model
+             |
+             v
+ Risk Classification and Probability
+             |
+             v
+     Streamlit Result Display
+```
 
 ---
 
@@ -141,256 +111,280 @@ Review:
 ```mermaid
 flowchart TD
     subgraph A["1. Data Preparation"]
-        A1[Synthetic Data Generation]
-        A2[Exploratory Data Analysis]
-        A3[Feature Engineering]
+        A1[Heart Disease Dataset]
+        A2[Data Cleaning]
+        A3[Exploratory Data Analysis]
+        A4[Feature Engineering]
 
-        A1 --> A2 --> A3
+        A1 --> A2 --> A3 --> A4
     end
 
-    subgraph B["2. Machine Learning Pipeline"]
-        B1[Data Preprocessing]
-        B2[Numerical Scaling]
-        B3[Categorical Encoding]
-        B4[Train and Test Split]
-        B5[Regression Model Training]
-        B6[Model Comparison]
-        B7[Ridge Regression Selection]
+    subgraph B["2. Preprocessing"]
+        B1[Train and Test Split]
+        B2[Feature Scaling]
+        B3[SMOTE Class Balancing]
+        B4[Processed Training Data]
 
-        B1 --> B2
-        B1 --> B3
-        B2 --> B4
-        B3 --> B4
-        B4 --> B5 --> B6 --> B7
+        B1 --> B2 --> B3 --> B4
     end
 
-    subgraph C["3. Model Storage and Deployment"]
-        C1[Store Trained Model]
-        C2[Store Preprocessing Pipeline]
-        C3[Streamlit Dashboard]
+    subgraph C["3. Model Development"]
+        C1[Model Comparison]
+        C2[Hyperparameter Tuning]
+        C3[XGBoost Selection]
+        C4[Model Evaluation]
+        C5[Save Model and Scaler]
 
-        C1 --> C3
-        C2 --> C3
+        C1 --> C2 --> C3 --> C4 --> C5
     end
 
-    subgraph D["4. Decision Support"]
-        D1[Opportunity Ranking]
-        D2[Score Prediction]
-        D3[Prediction Explainability]
-        D4[Investment Score]
-        D5[Invest / Review / Reject]
+    subgraph D["4. Prediction Application"]
+        D1[Patient Input]
+        D2[Input Scaling]
+        D3[Risk Prediction]
+        D4[Probability Estimate]
+        D5[Streamlit Results]
 
-        D1 --> D4
-        D2 --> D4
+        D1 --> D2 --> D3
         D3 --> D4
+        D3 --> D5
         D4 --> D5
     end
 
-    A3 --> B1
-    B7 --> C1
-    B7 --> C2
-    C3 --> D1
-    C3 --> D2
-    C3 --> D3
+    A4 --> B1
+    B4 --> C1
+    C5 --> D2
 ```
 
 ---
 
 ## Machine Learning Workflow
 
-### 1. Synthetic Data Generation
+### 1. Data Cleaning
 
-The project generates 5,000 synthetic investment-opportunity records.
+The dataset is inspected and prepared before model development.
 
-The dataset includes information related to:
-
-- Financial performance
-- Investment size
-- Capital and operating costs
-- Expected ROI
-- Internal rate of return
-- Net present value
-- Payback period
-- Market size and growth
-- Customer demand and adoption
-- Strategic alignment
-- Risk indicators
-- Sustainability and ESG
-- Sector
-- Region
-- Competition level
+The cleaning stage ensures that the available clinical variables can be processed consistently throughout the machine learning pipeline.
 
 ### 2. Exploratory Data Analysis
 
-The dataset is explored through:
+Exploratory analysis is used to understand:
 
-- Summary statistics
-- Investment-score distributions
-- Recommendation distributions
-- Sector comparisons
-- Region comparisons
-- Correlation analysis
-- Risk-versus-score comparisons
-- ROI-versus-score comparisons
-- Strategic-impact analysis
+- Feature distributions
+- Target-class distribution
+- Relationships between clinical variables
+- Potential data-quality issues
+- Patterns associated with heart disease risk
+- Possible class imbalance
 
 ### 3. Feature Engineering
 
-The project creates additional decision-support features, including:
+The available patient variables are prepared and transformed into model-ready features.
 
-- Overall risk score
-- Strategic impact score
-- Sustainability score
-- Market attractiveness score
-- Financial strength score
-- Risk-adjusted ROI
-- Profitability index
-- Payback efficiency
+This stage ensures that the same feature representation is used during both model training and application inference.
 
-### 4. Data Preprocessing
+### 4. Train and Test Split
 
-Numerical features are standardized using:
+The dataset is separated into training and evaluation portions.
 
-```text
-StandardScaler
-```
+The training data is used to fit the preprocessing and classification pipeline, while the held-out data is used to evaluate model performance.
 
-Categorical features are encoded using:
+### 5. Feature Scaling
+
+Numerical variables are scaled before model training.
+
+The fitted scaler is saved as:
 
 ```text
-OneHotEncoder
+scaler.joblib
 ```
 
-The transformations are stored in a fitted preprocessing pipeline and reused during inference.
+The Streamlit application loads the same scaler and applies it to new patient inputs before generating predictions.
 
-### 5. Model Training
+### 6. Class Balancing
 
-The machine learning task is formulated as a regression problem.
+SMOTE is used during model development to address class imbalance in the training data.
 
-The target variable is:
+SMOTE creates synthetic examples for the minority class to help the model learn patterns associated with less-represented cases.
+
+Resampling should be applied only to the training portion of the data to reduce the risk of data leakage.
+
+### 7. Model Comparison
+
+Multiple machine learning classification models are trained and evaluated.
+
+The comparison considers several classification metrics rather than relying only on accuracy.
+
+### 8. Hyperparameter Tuning
+
+Model parameters are adjusted to improve classification performance and support the recall-focused objective.
+
+### 9. Model Evaluation
+
+The final model is evaluated using:
+
+- Accuracy
+- Precision
+- Recall
+- F1 Score
+
+Recall receives particular attention because it measures the proportion of positive cases correctly identified by the model.
+
+### 10. Model Deployment
+
+The selected model and scaler are saved using Joblib and integrated into the Streamlit application.
+
+The saved files are:
 
 ```text
-Investment Score: 0–100
+heart_model.joblib
+scaler.joblib
 ```
-
-Multiple regression algorithms are trained and compared.
-
-### 6. Model Evaluation
-
-The models are evaluated using:
-
-- Mean Absolute Error
-- Root Mean Squared Error
-- R² Score
-
-The model with the lowest Mean Absolute Error is selected.
-
-### 7. Prediction
-
-The selected model predicts an Investment Score, which is limited to remain between 0 and 100.
-
-### 8. Recommendation Generation
-
-The predicted score is converted into an Invest, Review, or Reject recommendation.
-
-### 9. Explainability
-
-For each prediction, the application calculates feature contributions using the processed feature values and the Ridge Regression coefficients.
-
-This allows the dashboard to display which factors increased or decreased the predicted Investment Score.
 
 ---
 
-## Models Compared
+## Classification Objective
 
-The following regression models were evaluated:
+The application performs a binary classification task.
 
-- Linear Regression
-- Ridge Regression
-- Random Forest Regressor
-- Gradient Boosting Regressor
-- Extra Trees Regressor
+```text
+Input:
+Patient clinical information
 
-The recorded model-comparison results are:
+Output:
+Heart disease risk classification
+and model probability
+```
 
-| Model | MAE | RMSE | R² |
-|---|---:|---:|---:|
-| Ridge Regression | 7.3260 | 9.3381 | 0.8394 |
-| Linear Regression | 7.3466 | 9.3661 | 0.8384 |
-| Gradient Boosting | 8.0693 | 10.1460 | 0.8104 |
-| Extra Trees | 8.7917 | 11.0306 | 0.7759 |
-| Random Forest | 8.8311 | 11.0148 | 0.7765 |
+The application processes the patient values using the saved scaler and generates a prediction using the trained classification model.
+
+The displayed probability is a machine learning model output. It should not be interpreted as a clinically validated probability of developing heart disease.
 
 ---
 
-## Selected Model
+## Final Model
 
-The selected model is:
-
-```text
-Ridge Regression
-```
-
-Ridge Regression achieved the lowest Mean Absolute Error in the recorded model comparison:
+The deployed model is:
 
 ```text
-MAE  = 7.3260
-RMSE = 9.3381
-R²   = 0.8394
+XGBoost Classifier
 ```
 
-Ridge Regression also supports coefficient-based feature contribution analysis, allowing the application to explain the direction and approximate impact of individual processed features.
+XGBoost is a gradient-boosted decision-tree algorithm that combines multiple sequential decision trees to generate the final prediction.
+
+The model was selected and optimized with an emphasis on:
+
+- Improving recall
+- Reducing false negatives
+- Maintaining strong overall classification performance
+- Producing probability-based predictions
+
+The trained model is stored in:
+
+```text
+heart_model.joblib
+```
 
 ---
 
-## Recommendation Logic
+## Reported Model Performance
 
-The predicted Investment Score is mapped to a recommendation using the following thresholds:
+The project reports the following evaluation results:
 
-| Score Range | Recommendation |
-|---|---|
-| 75–100 | Invest |
-| 45–74.99 | Review |
-| Below 45 | Reject |
+| Metric | Result |
+|---|---:|
+| Accuracy | 98.54% |
+| Precision | 100.00% |
+| Recall | 97.09% |
+| F1 Score | 98.52% |
 
-The implemented logic is:
+These values represent the reported performance from the project’s model-evaluation process.
 
-```python
-if score >= 75:
-    recommendation = "Invest"
-elif score >= 45:
-    recommendation = "Review"
-else:
-    recommendation = "Reject"
-```
-
-These thresholds are project-defined decision rules created for the synthetic portfolio scenario. They are not validated financial standards.
+They should not be interpreted as evidence of clinical effectiveness or guaranteed real-world performance.
 
 ---
 
-## Prediction Explainability
+## Evaluation Metrics
 
-The application explains Ridge Regression predictions using local feature contributions.
+### Accuracy
 
-For each processed feature:
+Accuracy measures the proportion of all predictions that were classified correctly.
 
 ```text
-Feature Contribution =
-Processed Feature Value × Model Coefficient
+Accuracy =
+Correct Predictions / Total Predictions
 ```
 
-Positive contributions increase the predicted Investment Score, while negative contributions reduce it.
+### Precision
 
-The dashboard displays:
+Precision measures how often positive predictions were correct.
 
-- Top contributing features
-- Positive score drivers
-- Negative score drivers
-- Contribution direction
-- Contribution magnitude
-- Feature-contribution visualization
+```text
+Precision =
+True Positives / (True Positives + False Positives)
+```
 
-This provides a more transparent prediction experience than displaying a score without supporting information.
+### Recall
+
+Recall measures how many actual positive cases were correctly identified.
+
+```text
+Recall =
+True Positives / (True Positives + False Negatives)
+```
+
+The reported recall of `97.09%` means that approximately 97.09% of positive cases in the evaluation data were identified by the model.
+
+### F1 Score
+
+The F1 Score balances precision and recall using their harmonic mean.
+
+```text
+F1 =
+2 × (Precision × Recall) / (Precision + Recall)
+```
+
+---
+
+## Recall-Focused Optimization
+
+Accuracy alone may hide poor performance on an important class, especially when the dataset is imbalanced.
+
+This project gives additional attention to recall because recall is directly affected by false-negative predictions.
+
+The recall-focused strategy includes:
+
+- Inspecting the target-class distribution
+- Applying SMOTE to the training data
+- Comparing multiple classification algorithms
+- Monitoring false-negative predictions
+- Tuning model hyperparameters
+- Considering recall during model selection
+- Reporting precision and F1 Score alongside accuracy
+
+The objective is to reduce the number of positive cases incorrectly classified as negative while maintaining useful overall performance.
+
+---
+
+## Confusion Matrix
+
+A binary classification confusion matrix contains four possible outcomes:
+
+| Actual Class | Predicted Negative | Predicted Positive |
+|---|---:|---:|
+| Actual Negative | True Negative | False Positive |
+| Actual Positive | False Negative | True Positive |
+
+For this project, false negatives are especially important.
+
+A false negative occurs when:
+
+```text
+Actual class: Positive
+Predicted class: Negative
+```
+
+Reducing false negatives increases recall.
 
 ---
 
@@ -401,74 +395,43 @@ This provides a more transparent prediction experience than displaying a score w
 | Programming language | Python |
 | User interface | Streamlit |
 | Machine learning | Scikit-learn |
-| Selected model | Ridge Regression |
+| Final classifier | XGBoost |
 | Data processing | Pandas |
 | Numerical operations | NumPy |
-| Interactive visualization | Plotly |
-| Analysis visualization | Matplotlib and Seaborn |
-| Preprocessing | StandardScaler and OneHotEncoder |
+| Class balancing | SMOTE |
 | Model persistence | Joblib |
-| Experiments | Jupyter Notebook |
-| Data format | CSV |
+| Analysis environment | Jupyter Notebook |
+| Dataset format | CSV |
+| Deployment | Streamlit Community Cloud |
 
 ---
 
 ## Project Structure
 
 ```text
-ai-investment-opportunity-analyzer/
-├── app/
-│   └── streamlit_app.py
-│
-├── config/
-│
-├── data/
-│   ├── raw/
-│   │   └── synthetic_investment_opportunities.csv
-│   │
-│   └── processed/
-│       ├── X_test_processed.csv
-│       ├── X_train_processed.csv
-│       ├── y_test.csv
-│       └── y_train.csv
-│
-├── models/
-│   ├── best_model.pkl
-│   ├── model_metadata.json
-│   └── preprocessor.pkl
-│
-├── notebooks/
-│   ├── 01_data_generation.ipynb
-│   ├── 02_eda.ipynb
-│   ├── 03_preprocessing_feature_engineering.ipynb
-│   ├── 04_model_training_comparison.ipynb
-│   ├── 05_explainability.ipynb
-│   └── 06_final_pipeline_test.ipynb
-│
-├── reports/
-│   ├── figures/
-│   ├── feature_importance.csv
-│   ├── local_explanation_example.csv
-│   ├── model_comparison_results.csv
-│   ├── recommendation_summary.csv
-│   ├── region_score_summary.csv
-│   ├── score_correlations.csv
-│   ├── sector_score_summary.csv
-│   ├── test_predictions.csv
-│   └── top_10_opportunities.csv
-│
-├── src/
-│   ├── __pycache__/
-│   ├── explanations.py
-│   ├── predict.py
-│   └── scoring.py
-│
-├── tests/
-├── .gitignore
-├── deployment_notes.md
-├── README.md
-└── requirements.txt
+heart-disease-prediction/
+├── .devcontainer/
+├── app.py
+├── heart_disease_model_selection_analysis.ipynb
+├── heart_model.joblib
+├── heart.csv
+├── requirements.txt
+├── scaler.joblib
+└── train_model.py
 ```
+
+### Main Files
+
+| File | Purpose |
+|---|---|
+| `app.py` | Streamlit user interface and prediction workflow |
+| `train_model.py` | Model training, preprocessing, and artifact generation |
+| `heart_disease_model_selection_analysis.ipynb` | Data analysis, model comparison, and experimentation |
+| `heart_model.joblib` | Saved trained classification model |
+| `scaler.joblib` | Saved feature scaler |
+| `heart.csv` | Heart disease dataset |
+| `requirements.txt` | Python dependencies |
+| `.devcontainer/` | Development-container configuration |
 
 ---
 
@@ -477,8 +440,8 @@ ai-investment-opportunity-analyzer/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Azoqoz/ai-investment-opportunity-analyzer.git
-cd ai-investment-opportunity-analyzer
+git clone https://github.com/Azoqoz/heart-disease-risk-prediction.git
+cd heart-disease-risk-prediction
 ```
 
 ### 2. Create a Virtual Environment
@@ -509,10 +472,10 @@ No external API key or paid service is required to run the application.
 
 ## Running the Application
 
-Start the Streamlit dashboard using:
+Start the Streamlit application using:
 
 ```bash
-streamlit run app/streamlit_app.py
+streamlit run app.py
 ```
 
 Streamlit will display a local URL in the terminal, typically:
@@ -525,143 +488,140 @@ Open the displayed URL in your browser.
 
 ---
 
-## Reproducing the Machine Learning Workflow
+## Training the Model
 
-The notebooks are organized in execution order.
+To retrain the model using the included training script, run:
 
-Run them sequentially:
-
-```text
-01_data_generation.ipynb
-02_eda.ipynb
-03_preprocessing_feature_engineering.ipynb
-04_model_training_comparison.ipynb
-05_explainability.ipynb
-06_final_pipeline_test.ipynb
+```bash
+python train_model.py
 ```
 
-This workflow reproduces:
-
-1. Synthetic data generation
-2. Exploratory data analysis
-3. Data preprocessing
-4. Feature engineering
-5. Model training
-6. Model comparison
-7. Best-model selection
-8. Explainability outputs
-9. Final prediction-pipeline validation
-
-The trained model and preprocessor are stored in:
+The training script is responsible for generating or updating the saved model artifacts:
 
 ```text
-models/best_model.pkl
-models/preprocessor.pkl
+heart_model.joblib
+scaler.joblib
 ```
+
+After retraining, restart the Streamlit application so that it loads the updated files.
+
+---
+
+## Model Analysis Notebook
+
+The repository includes the following notebook:
+
+```text
+heart_disease_model_selection_analysis.ipynb
+```
+
+The notebook contains the project’s machine learning experimentation and analysis workflow, including:
+
+- Dataset exploration
+- Data preprocessing
+- Model comparison
+- Classification evaluation
+- Model-selection analysis
+
+Open the notebook using Jupyter Notebook, JupyterLab, or the VS Code notebook interface.
 
 ---
 
 ## Deployment
 
-The application can be deployed using Streamlit Community Cloud.
+The application is deployed using Streamlit Community Cloud.
 
-Recommended deployment settings:
+Live application:
+
+[https://ai-heart-risk-detector.streamlit.app/](https://ai-heart-risk-detector.streamlit.app/)
+
+Recommended Streamlit deployment settings:
 
 ```text
-Repository: Azoqoz/ai-investment-opportunity-analyzer
+Repository: Azoqoz/heart-disease-risk-prediction
 Branch: main
-Main file path: app/streamlit_app.py
+Main file path: app.py
 ```
 
-The application does not require API keys or Streamlit secrets.
+The deployed application loads:
 
-The dataset, trained model, preprocessing pipeline, and model-comparison results are loaded directly from the repository.
+```text
+heart_model.joblib
+scaler.joblib
+```
 
----
-
-## Screenshots and Results
-
-### Model Comparison
-
-![Model Comparison](reports/figures/model_comparison_mae.png)
-
-### Actual vs. Predicted Scores
-
-![Actual vs Predicted Scores](reports/figures/actual_vs_predicted_scores.png)
-
-### Investment Score Distribution
-
-![Investment Score Distribution](reports/figures/investment_score_distribution.png)
-
-### Feature Importance
-
-![Feature Importance](reports/figures/top_20_feature_importance.png)
-
-### Local Prediction Explanation
-
-![Local Explanation](reports/figures/local_explanation_example.png)
+No API keys or Streamlit secrets are required.
 
 ---
 
 ## Current Limitations
 
-- The dataset is entirely synthetic
-- The model has not been validated using real investment outcomes
-- Recommendation thresholds are manually defined project rules
-- The model may reproduce assumptions embedded in the synthetic data-generation process
-- Simplified dashboard inputs generate additional model features using predefined mappings, formulas, medians, and modes
-- Coefficient-based explanations describe the Ridge Regression model but do not establish causation
-- The dashboard does not include real-time financial or market data
-- The application does not include authentication or saved user sessions
-- The current results do not demonstrate performance on a real production distribution
-- The system should not replace financial analysis, due diligence, or expert judgment
+- The model is not clinically validated
+- The application is not a medical diagnostic tool
+- Reported performance may depend on the selected dataset and evaluation split
+- Strong performance on one test set does not guarantee equivalent real-world performance
+- SMOTE-generated examples are synthetic and may not represent real patients
+- Prediction probabilities are model outputs rather than clinically validated disease probabilities
+- The model may perform differently across demographic or clinical subgroups
+- The application does not include laboratory testing or physician assessment
+- The application does not provide treatment recommendations
+- Dataset bias may affect model predictions
+- The project does not include external clinical validation
+- The interface does not provide production healthcare privacy or governance controls
+- The system should not be used for medical decision-making
 
 ---
 
 ## Future Improvements
 
-- Train and validate the system using a governed real-world dataset
-- Add cross-validation and systematic hyperparameter tuning
-- Add SHAP-based global and local explanations
-- Add model and dataset versioning
+- Add external validation using an independent dataset
+- Add stratified cross-validation
+- Add probability-calibration analysis
+- Add ROC-AUC reporting
+- Add Precision-Recall curve reporting
+- Add confusion-matrix visualization
+- Add threshold selection based on recall and false-negative cost
+- Add subgroup performance analysis
+- Add SHAP-based model explanations
+- Add automated data-validation tests
+- Add model-version tracking
 - Add experiment tracking
-- Add automated unit and integration tests
-- Add data-validation checks
-- Add model-drift and data-drift monitoring
-- Add scenario comparison between multiple opportunities
-- Add downloadable analysis reports
-- Add a REST API for external integrations
-- Add user authentication and saved analysis sessions
+- Add model-drift monitoring
+- Add unit and integration tests
 - Add Docker support
-- Add continuous integration and automated deployment
-- Add external market-data integrations
-- Add human approval and governance workflows
+- Add continuous integration
+- Add a secured prediction API
+- Add stronger privacy and access controls
+- Add medically reviewed user guidance
+- Add formal clinical and regulatory validation before any healthcare use
 
 ---
 
 ## Why This Project Matters
 
-This project demonstrates a complete applied machine learning workflow rather than only presenting a trained notebook model.
+This project demonstrates an end-to-end machine learning classification workflow rather than only presenting a trained model inside a notebook.
 
-It covers practical skills including:
+It covers practical machine learning and application-development skills, including:
 
-- Synthetic data generation
+- Data cleaning
 - Exploratory data analysis
 - Feature engineering
-- Numerical and categorical preprocessing
-- Regression model development
-- Model evaluation and comparison
-- Model selection
-- Prediction-pipeline construction
+- Feature scaling
+- Imbalanced-class handling
+- SMOTE integration
+- Classification model comparison
+- Hyperparameter tuning
+- Evaluation using multiple metrics
+- Recall-focused model selection
+- False-negative analysis
+- XGBoost model development
 - Model persistence
-- Explainable machine learning
-- Decision-rule implementation
-- Interactive analytics
-- Streamlit dashboard development
-- Cloud deployment preparation
-- User-focused presentation of technical outputs
+- Probability-based prediction
+- Streamlit application development
+- Cloud deployment
+- Responsible communication of model limitations
 
-The project shows how a machine learning model can be transformed into a usable decision-support application while clearly communicating its assumptions and limitations.
+The project also demonstrates why metric selection should reflect the consequences of classification errors rather than relying only on overall accuracy.
 
 ---
 
