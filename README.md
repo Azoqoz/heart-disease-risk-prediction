@@ -74,34 +74,14 @@ The deployed Streamlit application is available at:
 
 ## Demo Workflow
 
-1. Open the Streamlit application.
-2. Enter the requested patient clinical information.
-3. Submit the information for prediction.
-4. Apply the saved feature-scaling process.
-5. Send the processed values to the trained XGBoost model.
-6. Generate a risk classification.
-7. Calculate the corresponding model probability.
-8. Display the result through the Streamlit interface.
-
-Example workflow:
+1. Enter the requested patient clinical information.
+2. Submit the values through the Streamlit interface.
+3. Validate and scale the inputs using the saved preprocessing scaler.
+4. Generate a prediction using the trained XGBoost model.
+5. Display the predicted risk class and model probability.
 
 ```text
-Patient Clinical Information
-             |
-             v
-      Input Validation
-             |
-             v
-    Saved Feature Scaler
-             |
-             v
-    Trained XGBoost Model
-             |
-             v
- Risk Classification and Probability
-             |
-             v
-     Streamlit Result Display
+Patient Inputs → Validation and Scaling → XGBoost Prediction → Risk Class and Probability → Streamlit Result
 ```
 
 ---
@@ -109,51 +89,38 @@ Patient Clinical Information
 ## System Architecture
 
 ```mermaid
-flowchart TD
-    subgraph A["1. Data Preparation"]
-        A1[Heart Disease Dataset]
-        A2[Data Cleaning]
-        A3[Exploratory Data Analysis]
-        A4[Feature Engineering]
+flowchart LR
+    subgraph TRAIN["Model Development"]
+        direction TB
 
-        A1 --> A2 --> A3 --> A4
+        T1[Heart Disease Dataset]
+        T2[Data Cleaning and EDA]
+        T3[Feature Preparation]
+        T4[Train and Test Split]
+        T5[Feature Scaling]
+        T6[SMOTE on Training Data]
+        T7[Model Comparison and Tuning]
+        T8[XGBoost Model]
+        T9[Save Model and Scaler]
+
+        T1 --> T2 --> T3 --> T4 --> T5 --> T6 --> T7 --> T8 --> T9
     end
 
-    subgraph B["2. Preprocessing"]
-        B1[Train and Test Split]
-        B2[Feature Scaling]
-        B3[SMOTE Class Balancing]
-        B4[Processed Training Data]
+    subgraph APP["Streamlit Prediction Application"]
+        direction TB
 
-        B1 --> B2 --> B3 --> B4
+        A1[Patient Clinical Inputs]
+        A2[Input Validation]
+        A3[Load Saved Scaler and Model]
+        A4[Scale Patient Inputs]
+        A5[Generate Prediction]
+        A6[Risk Class and Probability]
+        A7[Display Results]
+
+        A1 --> A2 --> A3 --> A4 --> A5 --> A6 --> A7
     end
 
-    subgraph C["3. Model Development"]
-        C1[Model Comparison]
-        C2[Hyperparameter Tuning]
-        C3[XGBoost Selection]
-        C4[Model Evaluation]
-        C5[Save Model and Scaler]
-
-        C1 --> C2 --> C3 --> C4 --> C5
-    end
-
-    subgraph D["4. Prediction Application"]
-        D1[Patient Input]
-        D2[Input Scaling]
-        D3[Risk Prediction]
-        D4[Probability Estimate]
-        D5[Streamlit Results]
-
-        D1 --> D2 --> D3
-        D3 --> D4
-        D3 --> D5
-        D4 --> D5
-    end
-
-    A4 --> B1
-    B4 --> C1
-    C5 --> D2
+    T9 --> A3
 ```
 
 ---
