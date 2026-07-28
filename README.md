@@ -60,6 +60,4 @@ Optimized to reduce False Negatives and improve Recall performance.
 Streamlit App:
 https://ai-heart-risk-detector.streamlit.app/
 
-## 👨‍💻 Author
 
-Abdulaziz Mubarak AL-Mubarak
