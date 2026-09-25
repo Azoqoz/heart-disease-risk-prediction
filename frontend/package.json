@@ -1,0 +1,24 @@
+{
+  "name": "heart-signal-clinical-workbench",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "next": ">=15.5 <17",
+    "react": ">=19 <20",
+    "react-dom": ">=19 <20"
+  },
+  "devDependencies": {
+    "@types/node": ">=22 <25",
+    "@types/react": ">=19 <20",
+    "@types/react-dom": ">=19 <20",
+    "eslint": ">=9 <10",
+    "eslint-config-next": ">=15.5 <17",
+    "typescript": ">=5.8 <6"
+  }
+}
